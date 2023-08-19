@@ -1,2 +1,2 @@
-# game_nsx
- First Repository
+# First text Game >> NSX
+ Primeiro repositório para fins de aprendizado
