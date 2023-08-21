@@ -1,4 +1,5 @@
 from colorama import Fore, Style, Back, init
+import textwrap
 init(autoreset=True)
 
 
@@ -69,3 +70,8 @@ def titulos(msg):
     print(f"{msg.center(width)}")
     print("-~" * 30)
     print()
+
+
+def quebraLinha(msg):
+    new_text = textwrap.wrap(msg, 60)
+    return new_text
