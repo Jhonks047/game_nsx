@@ -1,0 +1,5 @@
+{
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\Users\\jhona\\OneDrive\\Documentos\\MeusProjetos\\game_nsx\\.venv\\Scripts;$env:PATH"
+    }
+}

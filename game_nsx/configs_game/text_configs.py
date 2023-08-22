@@ -1,5 +1,7 @@
 from colorama import Fore, Style, Back, init
 import textwrap
+from time import sleep
+
 init(autoreset=True)
 
 
@@ -75,3 +77,47 @@ def titulos(msg):
 def quebraLinha(msg):
     new_text = textwrap.wrap(msg, 60)
     return new_text
+
+
+def digitacao(msg, delay_ms=0.1):
+    for letra in msg:
+        print(f"{color(letra, 'lgreen')}", end="")
+        sleep(delay_ms)
+    print()
+
+def loading(time_ms, msg="loading"):
+    """Barra de carregamento
+
+    Args:
+        total (INT): Definir o tamanho do tempo de carregamento
+        msg (str, optional): Mensagem para ser exibida ao lado da barra de carregamento. Padrão "loading".
+    """
+    from time import sleep
+    from tqdm import tqdm
+    print()
+    for _ in tqdm(range(time_ms), desc=Fore.LIGHTWHITE_EX+Style.BRIGHT+f"{msg}", ascii=False, ncols=50, bar_format="{l_bar}{bar}"+Style.RESET_ALL):
+        sleep(0.05)
+    print()
+
+
+def locutor():
+    print(r"""
+           .-----.
+ \ ' /   _/    )/
+- ( ) -('---''--)
+ / . \((()\^_^/)()
+  \\_\ (()_)-((()()
+   '- \ )/\._./(()
+     '/\/( X   ) \
+     (___)|___/ ) \
+          |.#_|(___)
+         /\    \ ( (_
+         \/\/\/\) \\
+         | / \ |
+         |(   \|
+        _|_)__|_\_
+        )...()...(
+         | (   \ |     
+      .-'__,)  (  \
+                '\_-,
+          """)
