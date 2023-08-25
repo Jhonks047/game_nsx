@@ -1,6 +1,7 @@
 from colorama import Fore, Style, Back, init
 import textwrap
 from time import sleep
+from prompt_toolkit import prompt
 
 init(autoreset=True)
 
@@ -37,7 +38,7 @@ def color(text, sit):
     elif sit == "cyan":
         return f"{Fore.CYAN+Style.BRIGHT}{text}"
     elif sit == "yellow":
-        return f"{Fore.YELLOW+Style.BRIGHT}"
+        return f"{Fore.YELLOW+Style.BRIGHT}{text}"
     elif sit == "white":
         return f"{Fore.WHITE+Style.BRIGHT}{text}"
     
@@ -54,7 +55,7 @@ def color(text, sit):
     elif sit == "lcyan":
         return f"{Fore.LIGHTCYAN_EX+Style.BRIGHT}{text}"
     elif sit == "lyellow":
-        return f"{Fore.LIGHTYELLOW_EX+Style.BRIGHT}"
+        return f"{Fore.LIGHTYELLOW_EX+Style.BRIGHT}{text}"
     elif sit == "lwhite":
         return f"{Fore.LIGHTWHITE_EX+Style.BRIGHT}{text}"
 
@@ -100,6 +101,28 @@ def loading(time_ms, msg="loading"):
     print()
 
 
+def options_SN(text):
+    """Validar opções
+    
+    Raises:
+        ValueError: Causar uma exceção quando digitado um valor não permitido
+
+    Returns:
+        STR: Retornar a option para o menu na qual ele foi chamado.
+    """
+    while True:
+        try:
+            option = prompt(f"{text}: ").strip().upper()
+            if option not in ["S", "N"]:
+                raise ValueError("Valor inválido!")
+            else:
+                break
+        except ValueError as error:
+            print(color(f"Erro: {error}","r"))
+    return option
+    
+
+
 def locutor():
     print(r"""
            .-----.
@@ -120,4 +143,22 @@ def locutor():
          | (   \ |     
       .-'__,)  (  \
                 '\_-,
-          """)
+""")
+
+
+def dead():
+    print(r"""
+                   .-'''''-.
+                  /         \
+         .-.      |  _   _  |      .-.
+        (_. '._   | |_\ /_| |   _.' ._)
+           '-._'-.(_   A   _).-'_.-'
+               '-._| _____ |_.-'
+              _.-'_\`'''''`/_'-._
+         .-.-'_.-'  `-----'  '-._'-.-.
+        (,_.'`                   `'._,)
+""")
+
+
+def character_walking():
+    pass
