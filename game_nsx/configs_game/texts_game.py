@@ -33,3 +33,7 @@ def primeira_trajetoria():
     text = quebraLinha(f"   Como você pode ver, essa tabela são seus atributos iniciais, incluindo um sistema de nível, no qual te dará vantagens ao subir como, ataques especiais, desbloquear novas funções, explorar caminhos ocultos. Antes de você começar sua jornada, eu irei te recomendar um lugar para ir primeiro. O lugar é um vilarejo aqui próximo, chamado Vila da Queda das Estrelas, lá você poderá conversar com outras pessoas, talvez elas gostariam de conhecer você, te pedir algumas tarefas ou até mesmo recompensar você com algum item raro? Quem sabe...")
     for linha in text:
         digitacao(linha, 0.01)
+
+
+def buraco_maldito_text():
+    text = quebraLinha(f"   Você seguiu por um certo caminho e acabou encontrando o >> Buraco Maldito <<")

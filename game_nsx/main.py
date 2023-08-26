@@ -6,6 +6,7 @@ from time import sleep
 from game_sounds.main_sound import *
 from tabulate import tabulate
 from configs_game.other_configs import *
+from configs_game.enemies.main_enemys import *
 
 import random
 
@@ -36,6 +37,7 @@ class Character:
         self.experience_requirements.append(next_requirement)
         print(f"{color('Parabéns!', 'lgreen')} O seu personagem {color(self.name, 'lcyan')} subiu para o nível {color(self.level, 'lwhite')}!")
     
+    
     def character_info(self):
         exp = f"{self.experience}/{self.experience_requirements[-1]}"
         print(tabulate(
@@ -47,6 +49,21 @@ class Character:
             ],
             [f"{color(self.name, 'lcyan')}", f"{color('Level', 'lmagenta')}: {color(self.level, 'lwhite')}"], "simple_grid"
             ))
+    
+    
+    def character_attack(self):
+        attack = self.damage
+        return attack
+
+    
+    def character_dodge(self):
+        dodge_chance = random.randint(0, 15)
+        if dodge_chance <= self.dodge:
+            print("Você esquivou do ataque do inimigo!")
+            return True
+        else:
+            print("Você errou a esquiva...")
+            return False
     
     def run(self):
         loading(100, "Carregando arquivos locais...")
@@ -81,7 +98,7 @@ class Character:
         your_character.character_info()
         locutor()
         primeira_trajetoria() # Texto da primeira trajetória
-        titulos(f"ESCOLHA O QUE DESEJA FAZER > > {self.name} < <")
+        titulos(f"ESCOLHA O QUE DESEJA FAZER > > {your_character.name} < <")
         print(f"""
     {color("[ A ] Explorar a floresta antes de seguir.", "lgreen")}
     {color("[ B ] Perguntar ao locutor se há outra coisa a se fazer.", "lyellow")}
@@ -93,6 +110,12 @@ class Character:
         if choice == "A":
             titulos("CAMINHANDO ATÉ A FLORESTA")
             loading(50, "Explorando...")
+            if random_events_enemy():
+                titulos("MONSTRO ENCONTRADO!")
+                enemy_instances()
+                
+            else:
+                titulos("CAMINHO LIVRE")
         
 
 

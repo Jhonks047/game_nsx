@@ -1,4 +1,6 @@
+import random
 from configs_game.text_configs import *
+from configs_game.enemies.main_enemys import *
 def choices(*options):
     """Validar as ações do player
     
@@ -18,3 +20,12 @@ def choices(*options):
         except ValueError as error:
             print(f"Erro: {error}")
     return option
+
+
+def random_events_enemy():
+    choice = random.randint(1, 5)
+    
+    if choice == 1 or choice == 3:
+        return True
+    else:
+        return False
