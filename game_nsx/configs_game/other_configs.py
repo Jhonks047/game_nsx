@@ -23,8 +23,8 @@ def choices(*options):
 
 
 def random_events_enemy():
-    choice = random.randint(1, 5)
-    
+    #choice = random.randint(1, 5)
+    choice = 1
     if choice == 1 or choice == 3:
         return True
     else:
