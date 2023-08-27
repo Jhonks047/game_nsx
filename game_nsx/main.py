@@ -130,38 +130,8 @@ if __name__ == "__main__":
         titulos("EXPLORANDO O LIXÃO")
         loading(50, "Explorando...")
         if random_events_enemy():
-            titulos("INIMIGO ENCONTRADO!")
-            enemy = enemy_instances()
-            locutor()
-            primeiroInimigo_text()
-            print(f"""
-                {color("[ A ] Atacar o inimigo", "lgreen")}
-                {color("[ B ] Fugir", "lyellow")}
-                
-            {color("[ X ] Sair do jogo.", "red")}""")
-            action = choices("A", "B", "X")
-            if action == "A":
-                print("Você escolheu atacar!")
-                loading(50, "Lançando ataque ao inimigo...")
-                enemy_life = enemy.enemy_life(sit="int")
-                while True:
-                    sleep(5)
-                    if not enemy.dodge_enemy():
-                        print("O inimigo errou a esquiva! Seu ataque foi certeiro.")
-                        print(f"Vida do inimigo: {enemy.enemy_life(damage=your_character.character_attack(), sit='str')}")
-                        if enemy.enemy_life(sit="int") <= 0:
-                            break
-                        else:
-                            continue
-                    else:
-                        print("O inimigo se esquivou do seu ataque.")
-                        print("Hora do inimigo atacar!")
-                        if your_character.character_dodge():
-                            print("Você esquivou do ataque do inimigo!")
-                        else:
-                            print("Você errou a esquiva...")
-                            print(f"Sua vida: {your_character.character_life(damage=enemy.enemy_attack(), sit='str')}")
-                print("FIM")
+            if combat():
+                pass
         else:
             titulos("CAMINHO LIVRE")
             locutor()
