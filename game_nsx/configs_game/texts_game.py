@@ -53,6 +53,12 @@ def primeiroInimigo_text():
         digitacao(linha, 0.01)
 
 
+def primeiraVitoria_text():
+    text = quebraLinha("    Você venceu seu primeiro inimigo e ganhou alguns pontos de experiência. Essa experiência serve para você desbloquear novos itens, novos lugares, novos mapas e até mesmo ao decorrer do game, você pode desbloquear novos tipos de inimigos por ter ficado mais forte! Continue sua jornada e alcance a vitória.")
+    for linha in text:
+        digitacao(linha, 0.01)
+
+
 def buraco_maldito_text():
     text = quebraLinha(f"   Você seguiu por um certo caminho e acabou encontrando o >> Buraco Maldito <<")
     pass

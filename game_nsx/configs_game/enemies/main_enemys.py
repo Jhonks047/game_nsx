@@ -11,7 +11,7 @@ class Enemy():
         self.life_remaining = self.life
     
     
-    def enemy_life(self, damage=0, sit=""):
+    def show_life(self, damage=0, sit=""):
         self.life_remaining -= damage
         life_remaining = self.life_remaining
         life_enemy = color(f"{life_remaining}/{self.life}", "lgreen")
@@ -21,7 +21,7 @@ class Enemy():
             return life_remaining
     
     
-    def dodge_enemy(self):
+    def edodge(self):
         dodge_percentage = random.randint(0, self.dodge)
         if dodge_percentage == self.dodge:
             return False
@@ -29,15 +29,15 @@ class Enemy():
             return True
     
     
-    def enemy_attack(self):
+    def attack(self):
         attack = self.damage
         return attack
     
     
-    def enemy_info(self):
+    def info(self):
         print(tabulate(
             [
-            [color("Life", "lgreen"), self.enemy_life(sit="str")], 
+            [color("Life", "lgreen"), self.life(sit="str")], 
             [color("Damage", "lred"), self.damage], 
             [color("Dodge", "lblue"), self.dodge]
             ],
@@ -76,7 +76,7 @@ def enemy_choice(list):
     enemy = random.choice(list)
     print(tabulate(
             [
-            [color("Life", "lgreen"), enemy.enemy_life(sit="str")], 
+            [color("Life", "lgreen"), enemy.show_life(sit="str")], 
             [color("Damage", "lred"), enemy.damage], 
             [color("Dodge", "lblue"), enemy.dodge]
             ],

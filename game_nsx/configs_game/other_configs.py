@@ -1,7 +1,7 @@
-import random
 from configs_game.text_configs import *
 from configs_game.texts_game import *
 from configs_game.enemies.main_enemys import *
+from game_sounds.main_sound import *
 
 def choices(*options):
     """Validar as ações do player
@@ -34,7 +34,10 @@ def random_events_enemy():
 
 
 def combat(your_character):
+    sleep(1)
+    soundboard("entrada_inimigo", 0.5)
     titulos("INIMIGO ENCONTRADO!")
+    sleep(1)
     enemy = enemy_instances()
     locutor()
     primeiroInimigo_text()
@@ -46,28 +49,49 @@ def combat(your_character):
     action = choices("A", "B", "X")
     if action == "A":
         print("Você escolheu atacar!")
-        loading(50, "Lançando ataque ao inimigo...")
+        titulos("COMBATE")
         while True:
-            sleep(5)
-            if not enemy.dodge_enemy():
-                print("O inimigo errou a esquiva! Seu ataque foi certeiro.")
-                print(f"Vida do inimigo: {enemy.enemy_life(damage=your_character.character_attack(), sit='str')}")
-                if enemy.enemy_life(sit="int") <= 0:
+            if not enemy.edodge():
+                loading(25, "Lançando ataque ao inimigo...")
+                print(color(">> Ataque bem-sucedido!", 'lgreen'))
+                soundboard("enemy_hit", 0.5)
+                sleep(1)
+                print(f"Sua vida: {your_character.clife(sit='str')}", end=" | ")
+                print(f"Vida do inimigo: {enemy.show_life(damage=your_character.attack(), sit='str')}")
+                print()
+                if enemy.show_life(sit="int") <= 0:
                     enemy_status = "died"
+                    titulos("VOCÊ DERROTOU O INIMIGO!")
+                    soundboard("enemy_died", 0.5)
+                    fadeout(1000)
                     break
                 else:
                     continue
             else:
-                print("O inimigo se esquivou do seu ataque.")
-                print("Hora do inimigo atacar!")
-                if your_character.character_dodge():
-                    print("Você esquivou do ataque do inimigo!")
-                else:
-                    print("Você errou a esquiva...")
-                    print(f"Sua vida: {your_character.character_life(damage=enemy.enemy_attack(), sit='str')}")
-                    if your_character.character_life(sit="int") <= 0:
-                        character_status = "died"
+                sleep(1)
+                print(color(">> Você errou!", 'lred'))
+                sleep(1)
+                loading(25, "Inimigo lançando ataque... Cuidado!")
+            if your_character.cdodge():
+                print(color(">> Você esquivou !", 'lcyan'))
+            else:
+                sleep(1)
+                print(color(">> Você errou a esquiva!", 'lred'))
+                soundboard("player_hit", 0.5)
+                sleep(1)
+                print(f"Sua vida: {your_character.clife(damage=enemy.attack(), sit='str')}", end=" | ")
+                print(f"Vida do inimigo: {enemy.show_life(sit='str')}")
+                if your_character.clife(sit="int") <= 0:
+                    character_status = "died"
+                    soundboard("jogador_derrotado", 0.5)
         if enemy_status == "died":
+            soundboard("fase_concluida", 0.5)
             return True
         elif character_status == "died":
             return False
+
+
+def enemy_experience(type=""):
+    if type == "basic":
+        exp = random.randint(1, 50)
+        return exp

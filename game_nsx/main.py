@@ -40,11 +40,11 @@ class Character:
         print(f"{color('Parabéns!', 'lgreen')} O seu personagem {color(self.name, 'lcyan')} subiu para o nível {color(self.level, 'lwhite')}!")
     
     
-    def character_info(self):
+    def info(self):
         exp = f"{self.experience}/{self.experience_requirements[-1]}"
         print(tabulate(
             [
-            [color("Life", "lgreen"), self.character_life(sit="str")], 
+            [color("Life", "lgreen"), self.clife(sit="str")], 
             [color("Damage", "lred"), self.damage], 
             [color("Dodge", "lblue"), self.dodge],
             [color("Experience", "lyellow"), exp],
@@ -53,12 +53,12 @@ class Character:
             ))
     
     
-    def character_attack(self):
+    def attack(self):
         attack = self.damage
         return attack
 
     
-    def character_dodge(self):
+    def cdodge(self):
         dodge_chance = random.randint(0, 15)
         if dodge_chance <= self.dodge:
             return True
@@ -66,7 +66,7 @@ class Character:
             return False
     
     
-    def character_life(self, damage=0, sit=""):
+    def clife(self, damage=0, sit=""):
         self.life -= damage
         life_remaining = self.life
         life_character = color(f"{life_remaining}/100", "lgreen")
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     intro_text(character_name) # Explicação de como será o jogo
     informacoes_character_text() # Mostrar os atributos
     titulos("INFORMAÇÕES DO PERSONAGEM")
-    your_character.character_info()
+    your_character.info()
     locutor()
     primeira_trajetoria_text() # Texto da primeira trajetória
     titulos(f"ESCOLHA O QUE DESEJA FAZER > > {your_character.name} < <")
@@ -127,11 +127,19 @@ if __name__ == "__main__":
 {color("[ X ] Sair do jogo.", "red")}""")
     choice = choices("A", "B", "C", "X")
     if choice == "A":
+        fadeout(2000)
         titulos("EXPLORANDO O LIXÃO")
         loading(50, "Explorando...")
+        sleep(1)
         if random_events_enemy():
-            if combat():
-                pass
+            if combat(your_character):
+                print("VOCÊ VENCEU O COMBATE")
+                exp = enemy_experience(type="basic")
+                print(f"Você ganhou {color(exp, 'lyellow')} de experiência ")
+                your_character.gain_experience(exp)
+            else:
+                print("Você morreu e acabou o jogo!")
+                quit()
         else:
             titulos("CAMINHO LIVRE")
             locutor()
@@ -164,3 +172,6 @@ if __name__ == "__main__":
                     pass
                 elif choice == "X":
                     pass
+        locutor()
+        primeiraVitoria_text() #    Texto de primeira vitória em combate
+        your_character.info()
