@@ -48,13 +48,25 @@ def bifurcacao():
 
 
 def primeiroInimigo_text():
-    text = quebraLinha("    Você encotrou seu primeiro inimigo! Ele não aparenta ser tão forte, acho que você da conta de derrotá-lo. Escolha qual ação deseja executar. Por você ainda estar no nível 1, você terá apenas duas ações para executar.")
+    text = quebraLinha("    Você encotrou seu primeiro inimigo! Ele não aparenta ser tão forte, acho que você da conta de derrotá-lo. Seu nome e seus atributos estão logo abaixo para você analisar. Escolha qual ação deseja executar. Por você ainda estar no nível 1, você terá apenas duas ações para executar.")
     for linha in text:
         digitacao(linha, 0.01)
 
 
 def primeiraVitoria_text():
     text = quebraLinha("    Você venceu seu primeiro inimigo e ganhou alguns pontos de experiência. Essa experiência serve para você desbloquear novos itens, novos lugares, novos mapas e até mesmo ao decorrer do game, você pode desbloquear novos tipos de inimigos por ter ficado mais forte! Continue sua jornada e alcance a vitória.")
+    for linha in text:
+        digitacao(linha, 0.01)
+        
+
+def coisas_a_fazer_prologue_text():
+    text = quebraLinha("    No momento, a única coisa que posso te recomendar é derrotar vários inimigos até subir pelo menos ao nível 3 para poder desbloquear a Cidade da Queda das Estrelas.")
+    for linha in text:
+        digitacao(linha, 0.01)
+        
+        
+def coisas_a_fazer_prologue_text_2():
+    text = quebraLinha("    Eu ja te expliquei anteriormente sobre o que você poderia fazer.")
     for linha in text:
         digitacao(linha, 0.01)
 

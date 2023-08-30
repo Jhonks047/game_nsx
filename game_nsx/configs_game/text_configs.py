@@ -73,6 +73,7 @@ def titulos(msg):
     print(f"{msg.center(width)}")
     print("-~" * 30)
     print()
+    sleep(1)
 
 
 def quebraLinha(msg):
@@ -124,7 +125,7 @@ def options_SN(text):
 
 
 def locutor():
-    print(r"""
+    digitacao(r"""
            .-----.
  \ ' /   _/    )/
 - ( ) -('---''--)
@@ -143,7 +144,7 @@ def locutor():
          | (   \ |     
       .-'__,)  (  \
                 '\_-,
-""")
+""", 0.01)
 
 
 def dead():

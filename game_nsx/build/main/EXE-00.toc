@@ -38,6 +38,9 @@
   ('pyi_rth_inspect',
    'C:\\Users\\jhona\\OneDrive\\Documentos\\MeusProjetos\\game_nsx\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
    'PYSOURCE'),
+  ('pyi_rth_pkgres',
+   'C:\\Users\\jhona\\OneDrive\\Documentos\\MeusProjetos\\game_nsx\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgres.py',
+   'PYSOURCE'),
   ('pyi_rth_pkgutil',
    'C:\\Users\\jhona\\OneDrive\\Documentos\\MeusProjetos\\game_nsx\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
    'PYSOURCE'),
@@ -50,7 +53,7 @@
  [],
  False,
  False,
- 1692657818,
+ 1693407209,
  [('run.exe',
    'C:\\Users\\jhona\\OneDrive\\Documentos\\MeusProjetos\\game_nsx\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
    'EXECUTABLE')])

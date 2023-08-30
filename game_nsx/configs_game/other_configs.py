@@ -38,9 +38,11 @@ def combat(your_character):
     soundboard("entrada_inimigo", 0.5)
     titulos("INIMIGO ENCONTRADO!")
     sleep(1)
-    enemy = enemy_instances()
     locutor()
     primeiroInimigo_text()
+    sleep(1)
+    enemy = enemy_instances()
+    sleep(1)
     print(f"""
         {color("[ A ] Atacar o inimigo", "lgreen")}
         {color("[ B ] Fugir", "lyellow")}
@@ -48,20 +50,23 @@ def combat(your_character):
     {color("[ X ] Sair do jogo.", "red")}""")
     action = choices("A", "B", "X")
     if action == "A":
+        sleep(1)
         print("Você escolheu atacar!")
         titulos("COMBATE")
         while True:
+            loading(25, "Lançando ataque ao inimigo...")
             if not enemy.edodge():
-                loading(25, "Lançando ataque ao inimigo...")
                 print(color(">> Ataque bem-sucedido!", 'lgreen'))
+                sleep(1)
                 soundboard("enemy_hit", 0.5)
+                sleep(1)
+                print(f"Dano causado ao inimigo: -{color(your_character.damage, 'lred')}")
                 sleep(1)
                 print(f"Sua vida: {your_character.clife(sit='str')}", end=" | ")
                 print(f"Vida do inimigo: {enemy.show_life(damage=your_character.attack(), sit='str')}")
-                print()
                 if enemy.show_life(sit="int") <= 0:
                     enemy_status = "died"
-                    titulos("VOCÊ DERROTOU O INIMIGO!")
+                    print(f"Inimigo {enemy.name} derrotado!")
                     soundboard("enemy_died", 0.5)
                     fadeout(1000)
                     break
@@ -73,11 +78,14 @@ def combat(your_character):
                 sleep(1)
                 loading(25, "Inimigo lançando ataque... Cuidado!")
             if your_character.cdodge():
-                print(color(">> Você esquivou !", 'lcyan'))
+                print(color(">> Você esquivou!", 'lcyan'))
             else:
                 sleep(1)
                 print(color(">> Você errou a esquiva!", 'lred'))
+                sleep(1)
                 soundboard("player_hit", 0.5)
+                sleep(1)
+                print(f"Dano causado ao jogador: -{color(enemy.damage, 'lred')}")
                 sleep(1)
                 print(f"Sua vida: {your_character.clife(damage=enemy.attack(), sit='str')}", end=" | ")
                 print(f"Vida do inimigo: {enemy.show_life(sit='str')}")
@@ -89,6 +97,9 @@ def combat(your_character):
             return True
         elif character_status == "died":
             return False
+    elif action == "B":
+        sleep(1)
+        print("Você escolheu fugir!")
 
 
 def enemy_experience(type=""):

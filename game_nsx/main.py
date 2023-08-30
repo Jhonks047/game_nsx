@@ -118,60 +118,77 @@ if __name__ == "__main__":
     your_character.info()
     locutor()
     primeira_trajetoria_text() # Texto da primeira trajetória
-    titulos(f"ESCOLHA O QUE DESEJA FAZER > > {your_character.name} < <")
-    print(f"""
-    {color("[ A ] Explorar o lixão antes de seguir.", "lgreen")}
-    {color("[ B ] Perguntar ao locutor se há outra coisa a se fazer.", "lyellow")}
-    {color("[ C ] Ir para a Cidade da Queda das Estrelas.", "lmagenta")}
+    while True:
+        titulos(f"ESCOLHA O QUE DESEJA FAZER > > {your_character.name} < <")
+        print(f"""
+        {color("[ A ] Explorar o lixão antes de seguir.", "lgreen")}
+        {color("[ B ] Perguntar ao locutor se há outra coisa a se fazer.", "lyellow")}
+        {color("[ C ] Ir para a Cidade da Queda das Estrelas.", "lmagenta")}
 
-{color("[ X ] Sair do jogo.", "red")}""")
-    choice = choices("A", "B", "C", "X")
-    if choice == "A":
-        fadeout(2000)
-        titulos("EXPLORANDO O LIXÃO")
-        loading(50, "Explorando...")
-        sleep(1)
-        if random_events_enemy():
-            if combat(your_character):
-                print("VOCÊ VENCEU O COMBATE")
-                exp = enemy_experience(type="basic")
-                print(f"Você ganhou {color(exp, 'lyellow')} de experiência ")
-                your_character.gain_experience(exp)
+    {color("[ X ] Sair do jogo.", "red")}""")
+        choice = choices("A", "B", "C", "X")
+        if choice == "A":
+            fadeout(2000)
+            titulos("EXPLORANDO O LIXÃO")
+            loading(50, "Explorando...")
+            sleep(1)
+            if random_events_enemy():
+                if combat(your_character):
+                    titulos("VOCÊ VENCEU O COMBATE")
+                    exp = enemy_experience(type="basic")
+                    print(f"Você ganhou {color(exp, 'lyellow')} pontos de experiência!")
+                    your_character.gain_experience(exp)
+                else:
+                    print("Você morreu e acabou o jogo!")
+                    quit()
             else:
-                print("Você morreu e acabou o jogo!")
-                quit()
-        else:
-            titulos("CAMINHO LIVRE")
-            locutor()
-            caminho_livre_text() #  Texto de caminho livre
-            way = other_ways()
-            titulos(way)
-            if way == "Bifurcação":
-                bifurcacao() #  Texto da bifurcação
-                print(f"""
-                    {color("[ A ] Seguir para a esquerda", "lgreen")}
-                    {color("[ B ] Seguir para frente", "lcyan")}
-                    {color("[ C ] Seguir para a direita", "lmagenta")}
-                    {color("[ D ] Tentar voltar", "lyellow")}
-                    
-                {("[ X ] Sair do jogo.", "red")}""")
-                choice = choices("A", "B", "C", "D", "X")
-                if choice == "A":
-                    titulos("CAMINHANDO PELO GUETO DA ESQUERDA")
-                    loading(50, "Carregando...")
-                    if random_events_enemy():
-                        titulos("INIMIGO ENCONTRADO!")
-                        enemy_instances()
-                    else:
+                titulos("CAMINHO LIVRE")
+                locutor()
+                caminho_livre_text() #  Texto de caminho livre
+                way = other_ways()
+                titulos(way)
+                if way == "Bifurcação":
+                    bifurcacao() #  Texto da bifurcação
+                    print(f"""
+                        {color("[ A ] Seguir para a esquerda", "lgreen")}
+                        {color("[ B ] Seguir para frente", "lcyan")}
+                        {color("[ C ] Seguir para a direita", "lmagenta")}
+                        {color("[ D ] Tentar voltar", "lyellow")}
+                        
+                    {("[ X ] Sair do jogo.", "red")}""")
+                    choice = choices("A", "B", "C", "D", "X")
+                    if choice == "A":
+                        titulos("CAMINHANDO PELO GUETO DA ESQUERDA")
+                        loading(50, "Carregando...")
+                        if random_events_enemy():
+                            titulos("INIMIGO ENCONTRADO!")
+                            enemy_instances()
+                        else:
+                            pass
+                    elif choice == "B":
                         pass
-                elif choice == "B":
-                    pass
-                elif choice == "C":
-                    pass
-                elif choice == "D":
-                    pass
-                elif choice == "X":
-                    pass
-        locutor()
-        primeiraVitoria_text() #    Texto de primeira vitória em combate
-        your_character.info()
+                    elif choice == "C":
+                        pass
+                    elif choice == "D":
+                        pass
+                    elif choice == "X":
+                        quit()
+            break
+        elif choice == "B":
+            cont = 0
+            titulos("O que posso fazer?")
+            if cont == 0:
+                locutor()
+                coisas_a_fazer_prologue_text()
+                cont += 1
+            else:
+                locutor()
+                coisas_a_fazer_prologue_text_2()
+            continue
+        elif choice == "C":
+            pass
+        elif choice == "X":
+            quit()
+    locutor()
+    primeiraVitoria_text() #    Texto de primeira vitória em combate
+    your_character.info()
